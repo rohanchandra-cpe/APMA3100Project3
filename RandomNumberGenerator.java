@@ -26,21 +26,23 @@ public class RandomNumberGenerator {
 		randomNumGen();
 
 		//print out u51, u52, u53
-		for(int i = 51; i < 53 ; i++){
+		for(int i = 51; i <= 53 ; i++){
 			System.out.println(modArray.get(i));
 		}
 
 		System.out.println("------------------------------");
 
-		//do the mean 110 times using a sample size of 10. 
-		//TODO Maybe should abstract this into a function?
-		for(int i = 0; i < 110; i++){
-			double mean = 0;
-			for(int j = 0; j < 10; j++){
-				mean += invFx(numArray.remove(0));
-			}
-			m10.add(mean/10);
-		}
+		//do the mean 110 times using a sample size of values. 
+		m10 = samples110(10);
+		m30 = samples110(30);
+		m50 = samples110(50);
+		m100 = samples110(100);
+		m150 = samples110(150);
+		m250 = samples110(250);
+		m500 = samples110(500);
+		m1000 = samples110(1000);
+		System.out.println("All values calculated!");
+
 	}
 	/**
 	 * Generates a random number betwwen 0 and 1. Adds these values to modarray.
@@ -67,6 +69,24 @@ public class RandomNumberGenerator {
 	public static double invFx(double u){
 		double x = 57*Math.sqrt(2.0) * Math.sqrt( Math.log(1 / (1-u)) );
 		return x;
+	}
+	/**
+	 * Function to create an arraylist of 110 sample means
+	 * @param n sample size of each mean value
+	 * @return arraylist size 110 of each sample mean
+	 */
+	public static ArrayList<Double> samples110(int n){
+		ArrayList<Double> ret = new ArrayList<Double>();
+		for(int i = 0; i < 110; i++){
+			double mean = 0;
+			for(int j = 0; j < n; j++){
+				mean += invFx(numArray.remove(0));
+			}
+			mean = mean/ ((double) n);
+			m10.add(mean);
+			System.out.println(n + " " + mean);
+		}
+		return ret;
 	}
 	
 	
