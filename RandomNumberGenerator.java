@@ -18,6 +18,7 @@ public class RandomNumberGenerator {
 	static double standardDeviation = Math.sqrt(variance);
 
 	//static ArrayList<Double> numArray = new ArrayList<>();
+	static double[] zj = {-1.4, -1.0, -0.5, 0, 0.5, 1.0, 1.4};
 	static ArrayList<Double> modArray = new ArrayList<>();
 	static ArrayList<Double> m10 = new ArrayList<>();
 	static ArrayList<Double> m30 = new ArrayList<>();
@@ -36,6 +37,16 @@ public class RandomNumberGenerator {
 	static ArrayList<Double> z250 = new ArrayList<>();
 	static ArrayList<Double> z500 = new ArrayList<>();
 	static ArrayList<Double> z1000 = new ArrayList<>();
+
+	static ArrayList<Double> f10 = new ArrayList<>();
+	static ArrayList<Double> f30 = new ArrayList<>();
+	static ArrayList<Double> f50 = new ArrayList<>();
+	static ArrayList<Double> f100 = new ArrayList<>();
+	static ArrayList<Double> f150 = new ArrayList<>();
+	static ArrayList<Double> f250 = new ArrayList<>();
+	static ArrayList<Double> f500 = new ArrayList<>();
+	static ArrayList<Double> f1000 = new ArrayList<>();
+
 
 	public static void main(String[] args) {
 		//call random num gen
@@ -66,6 +77,15 @@ public class RandomNumberGenerator {
 		z250 = standardizedSamples110(m250, 250);
 		z500 = standardizedSamples110(m500, 500);
 		z1000 = standardizedSamples110(m1000, 1000);
+
+		f10 = calculateCDFs(z10);
+		f30 = calculateCDFs(z30);
+		f50 = calculateCDFs(z50);
+		f100 = calculateCDFs(z100);
+		f150 = calculateCDFs(z150);
+		f250 = calculateCDFs(z250);
+		f500 = calculateCDFs(z500);
+		f1000 = calculateCDFs(z1000);
 
 		System.out.println("All values calculated!");
 
@@ -129,6 +149,25 @@ public class RandomNumberGenerator {
 			returnList.add(toBeInserted);
 		}
 		return returnList;
+	}
+	public static ArrayList<Double> calculateCDFs(ArrayList<Double> zArray){
+		double lessThanCount = 0;
+		double valToInsert = 0.0;
+		ArrayList<Double> retArray = new ArrayList<>();
+		for(double z: zj){
+			for(double zArrayVal: zArray){
+				if(zArrayVal <= z){
+					lessThanCount++;
+				}
+				else{
+					//Nothing
+				}
+			}
+			valToInsert = lessThanCount / 110;
+			lessThanCount = 0;
+			retArray.add(valToInsert);
+		}
+		return retArray;
 	}
 	
 }
