@@ -71,7 +71,7 @@ public class RandomNumberGenerator {
 		return x;
 	}
 	/**
-	 * Function to create an arraylist of 110 sample means
+	 * Function to create an arraylist of 110 sample means and print them to terminal
 	 * @param n sample size of each mean value
 	 * @return arraylist size 110 of each sample mean
 	 */
@@ -83,7 +83,7 @@ public class RandomNumberGenerator {
 				mean += invFx(numArray.remove(0));
 			}
 			mean = mean/ ((double) n);
-			m10.add(mean);
+			ret.add(mean);
 			System.out.println(n + " " + mean);
 		}
 		return ret;
