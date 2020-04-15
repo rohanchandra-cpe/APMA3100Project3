@@ -10,7 +10,7 @@ public class RandomNumberGenerator {
 	static double K = Math.pow(2.0, 17.0);
 	static int i = 0; 
 	static int desiredNumber = 1000000; //To get values 51,52, and 53
-	static ArrayList<Double> numArray = new ArrayList<>();
+	//static ArrayList<Double> numArray = new ArrayList<>();
 	static ArrayList<Double> modArray = new ArrayList<>();
 	static ArrayList<Double> m10 = new ArrayList<>();
 	static ArrayList<Double> m30 = new ArrayList<>();
@@ -48,12 +48,12 @@ public class RandomNumberGenerator {
 	 * Generates a random number betwwen 0 and 1. Adds these values to modarray.
 	 */
 	public static void randomNumGen() {
-		numArray.add(xStart);
+		//numArray.add(xStart);
 		//modArray.add(xStart % K);
 		while(i < desiredNumber) { 
 			nextNum = ((a * xStart) + c) % K;
 			xStart = nextNum;
-			numArray.add(nextNum);
+			//numArray.add(nextNum);
 			modArray.add(nextNum / K);
 			nextNum = 0;
 			i++;
@@ -80,9 +80,11 @@ public class RandomNumberGenerator {
 		for(int i = 0; i < 110; i++){
 			double mean = 0;
 			for(int j = 0; j < n; j++){
-				mean += invFx(numArray.remove(0));
+				double u = modArray.remove(0);
+				//System.out.println(invFx(u));
+				mean += invFx(u);
 			}
-			mean = mean/ ((double) n);
+			mean = mean/ ( n);
 			ret.add(mean);
 			System.out.println(n + " " + mean);
 		}
