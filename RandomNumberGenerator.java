@@ -117,7 +117,7 @@ public class RandomNumberGenerator {
 		return ret;
 	}
 	/**
-	 * Function to generate an arraylist of 100 standardized values
+	 * Function to generate an arraylist of 100 standardized values. 
 	 * @param arg
 	 * @param n
 	 * @return
