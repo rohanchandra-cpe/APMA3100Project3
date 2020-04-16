@@ -19,7 +19,7 @@ public class RandomNumberGenerator {
 
 	//static ArrayList<Double> numArray = new ArrayList<>();
 	static double[] zj = {-1.4, -1.0, -0.5, 0, 0.5, 1.0, 1.4};
-	static double[] zjNormalCDFValues = {0.0256, 0.0262, 0.0268, 0.0281, 0.0294, 0.0301, 0.0307};
+	static double[] zjNormalCDFValues = {0.0808, 0.1587, 0.3085, 0.5000, 0.6915, 0.8413, 0.9192};
 
 	static ArrayList<Double> modArray = new ArrayList<>();
 	static ArrayList<Double> m10 = new ArrayList<>();
@@ -164,7 +164,7 @@ public class RandomNumberGenerator {
 	public static ArrayList<Double> standardizedSamples110(ArrayList<Double> arg, int n){
 		ArrayList<Double> returnList = new ArrayList<>();
 		for(Double mVal: arg){
-			double toBeInserted = (mVal - expectedValue) / (standardDeviation / Math.sqrt(n));
+			double toBeInserted = (mVal - expectedValue) / (standardDeviation / (Math.sqrt(n)));
 			//System.out.println(n + ": " + toBeInserted);
 			returnList.add(toBeInserted);
 		}
@@ -194,6 +194,8 @@ public class RandomNumberGenerator {
 		for(int i = 0; i < zjNormalCDFValues.length; i++){
 			MADVals.add(Math.abs(fArray.get(i) - zjNormalCDFValues[i]));
 		}
+		//Return the maximum value in the ArrayList
+		MADVals.sort(null);
 		return MADVals.get(MADVals.size() - 1);
 	}
 	
