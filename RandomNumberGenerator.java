@@ -19,6 +19,8 @@ public class RandomNumberGenerator {
 
 	//static ArrayList<Double> numArray = new ArrayList<>();
 	static double[] zj = {-1.4, -1.0, -0.5, 0, 0.5, 1.0, 1.4};
+	static double[] zjNormalCDFValues = {0.0256, 0.0262, 0.0268, 0.0281, 0.0294, 0.0301, 0.0307};
+
 	static ArrayList<Double> modArray = new ArrayList<>();
 	static ArrayList<Double> m10 = new ArrayList<>();
 	static ArrayList<Double> m30 = new ArrayList<>();
@@ -87,6 +89,23 @@ public class RandomNumberGenerator {
 		f500 = calculateCDFs(z500);
 		f1000 = calculateCDFs(z1000);
 
+		double mad10 = calculateMadMax(f10);
+		System.out.println(mad10);
+		double mad30 = calculateMadMax(f30);
+		System.out.println(mad30);
+		double mad50 = calculateMadMax(f50);
+		System.out.println(mad50);
+		double mad100 = calculateMadMax(f100);
+		System.out.println(mad100);
+		double mad150 = calculateMadMax(f150);
+		System.out.println(mad150);
+		double mad250 = calculateMadMax(f250);
+		System.out.println(mad250);
+		double mad500 = calculateMadMax(f500);
+		System.out.println(mad500);
+		double mad1000 = calculateMadMax(f1000);
+		System.out.println(mad1000);
+
 		System.out.println("All values calculated!");
 
 	}
@@ -132,7 +151,7 @@ public class RandomNumberGenerator {
 			}
 			mean = mean/ ( n);
 			ret.add(mean);
-			System.out.println(n + " " + mean);
+			//System.out.println(n + " " + mean);
 		}
 		return ret;
 	}
@@ -146,6 +165,7 @@ public class RandomNumberGenerator {
 		ArrayList<Double> returnList = new ArrayList<>();
 		for(Double mVal: arg){
 			double toBeInserted = (mVal - expectedValue) / (standardDeviation / Math.sqrt(n));
+			//System.out.println(n + ": " + toBeInserted);
 			returnList.add(toBeInserted);
 		}
 		return returnList;
@@ -168,6 +188,13 @@ public class RandomNumberGenerator {
 			retArray.add(valToInsert);
 		}
 		return retArray;
+	}
+	public static double calculateMadMax(ArrayList<Double> fArray){
+		ArrayList<Double> MADVals = new ArrayList<>();
+		for(int i = 0; i < zjNormalCDFValues.length; i++){
+			MADVals.add(Math.abs(fArray.get(i) - zjNormalCDFValues[i]));
+		}
+		return MADVals.get(MADVals.size() - 1);
 	}
 	
 }
